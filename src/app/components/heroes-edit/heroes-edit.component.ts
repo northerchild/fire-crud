@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Heroe} from '../../interfaces/heroe.interface';
 import {HeroesService} from '../../services/heroes.service';
-import {Router} from '@angular/router';
+import {Router,ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-heroes-edit',
   templateUrl: './heroes-edit.component.html',
@@ -15,16 +15,30 @@ export class HeroesEditComponent implements OnInit {
   	bio:"",
   	casa:"Marvel"
   }
-
-  constructor(private _hereoService:HeroesService, private router:Router) { }
+  nuevo:boolean = false;
+  id:string;
+  constructor(private _hereoService:HeroesService, private router:Router, private route:ActivatedRoute) { 
+  	this.route.params.subscribe(parametros=>{
+  		this.id = parametros["id"];
+  	})
+  }
 
   ngOnInit() {
   }
   guardar(){
-  	
- 	this._hereoService.nuevoHeroe(this.heroe).subscribe(data=>{
+  	if(this.id === "nuevo") {
+  		// insertando
+  		this._hereoService.nuevoHeroe(this.heroe).subscribe(data=>{
  		this.router.navigate(['/heroe',data.name])
-  	},error=> console.error(error)
-  	);
+	  	},error=> console.error(error)
+	  	);
+  	} else {
+  		// actualizando
+  		this._hereoService.ActualizarHeroe(this.heroe,this.id).subscribe(data=>{
+ 			console.log(data)
+	  	},error=> console.error(error)
+	  	);
+  	}
+ 	
   }
 }
