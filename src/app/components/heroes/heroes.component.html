@@ -23,8 +23,8 @@
 				    </tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td></td>
+					<tr *ngFor="let k of heroes | keys; let i = index">
+						<td>{{i}}</td>
 						<td></td>
 						<td></td>
 						<td></td>

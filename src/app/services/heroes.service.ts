@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {NgForm} from '@angular/forms'
 import {Heroe} from '../interfaces/heroe.interface';
 import {map} from 'rxjs/operators';
 @Injectable({
@@ -31,5 +32,12 @@ export class HeroesService {
   		console.log(res.json());
   		return res.json();
   	}))	
+  	}
+  	getHeroe(key$:string){
+  	let url = `${this.heroeURL}/${key$}.json`;
+  	return this.http.get(url).pipe(map(res=>res.json()))	
+  	}
+  	getHeroes(){
+  	return this.http.get(this.heroesURL).pipe(map(res=>res.json()))	
   	}
 }
