@@ -24,9 +24,9 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let k of heroes | keys; let i = index">
-						<td>{{i}}</td>
-						<td></td>
-						<td></td>
+						<td>{{i+1}}</td>
+						<td>{{heroes[k].nombre}}</td>
+						<td>{{heroes[k].casa}}</td>
 						<td></td>
 					</tr>
 					<tr>
