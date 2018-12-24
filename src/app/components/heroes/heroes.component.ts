@@ -8,10 +8,12 @@ import {Router,ActivatedRoute} from '@angular/router';
 })
 export class HeroesComponent implements OnInit {
   heroes:any[] = [];
+  loading:boolean = true;
   constructor(private _heroeServices:HeroesService, private route:ActivatedRoute) {
   	this._heroeServices.getHeroes().subscribe(data=>{
   		console.log(data)
   		this.heroes = data;
+  		this.loading = false;
   	})
    }
 

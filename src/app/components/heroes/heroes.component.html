@@ -31,14 +31,14 @@
 							<button (click)='eliminar(k)' class="btn btn-outline-danger">Eliminar</button>
 						</td>
 					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
 				</tbody>
 			</table>
+			<div *ngIf="(heroes | keys).lenght === 0 && !loading" class="alert alert-info">
+				<strong>No hay</strong>más registros que mostrar
+			</div>
+			<div *ngIf="loading" class="alert alert-danger">
+				<strong>Cargando</strong>por favor espere 
+			</div>
 		</div>
 	</div>
 </div>
